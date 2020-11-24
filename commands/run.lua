@@ -12,5 +12,5 @@ run:action(function(args)
     return
   end
 
-  os.execute("LUA_PATH='lua_modules/share/lua/".. content.dependencies.lua .."/?.lua;lua_modules/share/lua/".. content.dependencies.lua.."/?/init.lua;;' LUA_CPATH='lua_modules/lib/lua/".. content.dependencies.lua.."/?.so' " .. content.scripts[args.script])
+  assert(os.execute("PATH=\"lua_modules/bin:$PATH\" LUA_PATH='lua_modules/share/lua/".. content.dependencies.lua .."/?.lua;lua_modules/share/lua/".. content.dependencies.lua.."/?/init.lua;;' LUA_CPATH='lua_modules/lib/lua/".. content.dependencies.lua.."/?.so' " .. content.scripts[args.script]))
 end)
