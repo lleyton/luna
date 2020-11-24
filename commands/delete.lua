@@ -1,5 +1,6 @@
 local parser = require 'commands.parser'
 local config = require 'core.config'
+local install = require 'core.install'
 
 local delete = parser:command('delete d', 'Deletes a package')
 delete:argument('package', 'A name of a package'):args('+')

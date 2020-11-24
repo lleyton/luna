@@ -3,6 +3,7 @@ local config = require 'core.config'
 local versions = require 'core.version'
 local search = require 'luarocks.search'
 local queries = require 'luarocks.queries'
+local install = require 'core.install'
 
 local add = parser:command('add a', 'Adds a package')
 add:argument('package', 'A name of a package'):args('+')

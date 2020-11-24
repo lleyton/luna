@@ -4,14 +4,14 @@ local config = {}
 
 function config.read()
   local file = io.open('luna.toml', 'r')
-  local config = TOML.parse(file:read('a'))
+  local content = TOML.parse(file:read('a'))
   file:close()
-  return config
+  return content
 end
 
-function config.write(config)
+function config.write(content)
   local file = io.open('luna.toml', 'w+')
-  file:write(TOML.encode(config))
+  file:write(TOML.encode(content))
   file:close()
 end
 
