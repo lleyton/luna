@@ -1,5 +1,5 @@
 [dependencies]
-lua = "5.4"
+lua = "5.1"
 cqueues = "20200726.54-0"
 luasocket = "3.0rc1"
 [package]
