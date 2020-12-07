@@ -1,13 +1,21 @@
 local vers = require 'luarocks.core.vers'
+local luarocks = require 'luarocks'
 
-local version = {}
+local search = {}
 
-function version.parse(str)
+function search.parse(str)
   local name, version = str:match('(.+)@(.+)')
   return name or str, version
 end
 
-function version.latest(results)
+function search.find(name)
+  local results = assert(luarocks.search(name))
+  local package = results.binary[name] or results.sources[name]
+
+  return package
+end
+
+function search.latest(results)
   local versions = {}
 
   for version, _ in pairs(results) do
@@ -18,4 +26,4 @@ function version.latest(results)
   return versions[#versions]
 end
 
-return version
+return search

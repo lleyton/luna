@@ -1,30 +1,40 @@
 local parser = require 'commands.parser'
 local config = require 'core.config'
-local versions = require 'core.version'
-local search = require 'luarocks.search'
-local queries = require 'luarocks.queries'
-local install = require 'core.install'
+local search = require 'core.search'
+local pkg = require 'core.pkg'
 
 local add = parser:command('add a', 'Adds a package')
 add:argument('package', 'A name of a package'):args('+')
 
 add:action(function(args)
-  local config = config.read()
-  for _, name in ipairs(args.package) do
-    local name, version = versions.parse(name)
-    local results = search.search_repos(queries.new(name), config.dependencies.lua)
-    if next(results) == nil then 
+  local cfg = config.read()
+  local install_queue = {}
+
+  for _, tag in ipairs(args.package) do
+    local name, version = search.parse(tag)
+    local results = search.find(name)
+
+    if not results then
       print('Could not find package: ' .. name)
-      return
+      os.exit(1)
     end
 
-    if version and not results[name][version] then
+    if version and not results[version] then
       print('Could not find version ' .. version .. ' for package ' .. name)
+      os.exit(1)
     end
 
-    if not version then version = versions.latest(results[name]).string end
-    config.dependencies[name] = version
+    if not version then
+      version = search.latest(results).string
+    end
+
+    cfg.dependencies[name] = version
+    install_queue[name] = version
   end
-  config.write(config)
-  install()
+
+  for name, version in pairs(install_queue) do
+    pkg.install(name, version)
+  end
+
+  config.write(cfg)
 end)
