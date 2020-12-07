@@ -1,0 +1,4 @@
+[submodule "luarocks-api"]
+	path = luarocks-api
+	url = git@github.com:luarocks/luarocks.git
+	branch = luarocks-api
