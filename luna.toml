@@ -1,8 +1,7 @@
 [package]
+name = "luna"
 version = "0.1.0"
-name = "my-new-project"
 lua = "5.4"
 [dependencies]
-array = "1.3.3-0"
-[scripts]
-start = "lua main.lua"
+lua-toml = "2.0-1"
+argparse = "0.7.1-1"
