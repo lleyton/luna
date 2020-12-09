@@ -10,9 +10,5 @@ if root then
   end
 end
 
--- TODO: We need to tell luarocks what version of Lua to use.
-local luarocks = require 'luarocks'
-luarocks.setup()
-
 require('commands.load')
 require('commands.parser'):parse()

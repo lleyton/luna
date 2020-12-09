@@ -2,12 +2,14 @@ local parser = require 'commands.parser'
 local config = require 'core.config'
 local search = require 'core.search'
 local pkg = require 'core.pkg'
+local setup = require 'core.setup'
 
 local add = parser:command('add a', 'Adds a package')
 add:argument('package', 'A name of a package'):args('+')
 
 add:action(function(args)
-  local cfg = config.read()
+  local cfg = config.read('luna.toml')
+  setup(cfg.dependencies.version)
   local install_queue = {}
 
   for _, tag in ipairs(args.package) do
@@ -36,5 +38,5 @@ add:action(function(args)
     pkg.install(name, version)
   end
 
-  config.write(cfg)
+  config.write('luna.toml', cfg)
 end)

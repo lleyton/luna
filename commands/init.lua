@@ -2,7 +2,7 @@ local parser = require 'commands.parser'
 local config = require 'core.config'
 
 parser:command('init', 'Creates a new luna.toml'):action(function()
-  config.write({
+  config.write('luna.toml', {
     package = {
       name = 'my-new-project',
       version = '0.1.0'
