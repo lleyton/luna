@@ -9,7 +9,7 @@ add:argument('package', 'A name of a package'):args('+')
 
 add:action(function(args)
   local cfg = config.read('luna.toml')
-  setup(cfg.dependencies.version)
+  setup(cfg.dependencies.lua)
   local install_queue = {}
 
   for _, tag in ipairs(args.package) do

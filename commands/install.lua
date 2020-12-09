@@ -8,6 +8,6 @@ i:argument('options', 'A list of options for installation'):args('*')
 
 i:action(function()
   local cfg = config.read('luna.toml')
-  setup(cfg.dependencies.version)
+  setup(cfg.dependencies.lua)
   pkg.install_all(cfg.dependencies)
 end)
