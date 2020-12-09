@@ -8,7 +8,7 @@ delete:argument('package', 'A name of a package'):args('+')
 
 delete:action(function(args)
     local cfg = config.read('luna.toml')
-    setup(cfg.dependencies.lua)
+    setup(cfg.package.lua)
     for _, name in ipairs(args.package) do
       pkg.remove(name)
       cfg.dependencies[name] = nil

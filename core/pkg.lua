@@ -5,11 +5,10 @@ function pkg.install(name, version)
   assert(luarocks.install(name, version, 'lua_modules', false, false))
 end
 
-function pkg.install_all(packages)
+function pkg.install_all(packages, progress_handler)
   for name, version in pairs(packages) do
-    if name ~= 'lua' then
-      assert(luarocks.install(name, version, 'lua_modules', false, false))
-    end
+    assert(luarocks.install(name, version, 'lua_modules', false, false))
+    progress_handler(name, version)
   end
 end
 
