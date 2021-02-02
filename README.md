@@ -1,2 +1,2 @@
 # Luna
-## A simple wrapper over the Luarocks API
+## A simple ~~shitty~~ wrapper over the Luarocks API
